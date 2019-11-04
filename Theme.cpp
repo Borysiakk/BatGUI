@@ -22,7 +22,7 @@ std::map<std::string,WidgetType> Theme::NameWidgetType =
         {"Button",WidgetType::Button},
 };
 
-Theme::Theme(std::string fileName):fileName(fileName),gui(std::make_unique<Gui>())
+Theme::Theme(std::string fileName):fileName(fileName)
 {
     load();
 }
@@ -37,7 +37,6 @@ WidgetConverter Theme::Create(WidgetType type)
         {
             object = new Button();
             object->loadResourceData(resources[WidgetType::Button].get());
-            gui->addWidget(object);
             break;
         }
     }

@@ -60,3 +60,42 @@ void Sprite::createVertices(const sf::Vector2f & _size)
 
     buffer.update(vertices.data());
 }
+
+void Sprite::updateVertices(const sf::Vector2f & _size)
+{
+
+    sf::FloatRect middleRect = { texture.middle };
+    if (_size.x != size.x && size.x != 0)
+    {
+        vertices[8].position.x =  _size.x - middleRect.left;
+        vertices[10].position.x = _size.x - middleRect.left;
+        vertices[12].position.x = _size.x - middleRect.left;
+        vertices[14].position.x = _size.x - middleRect.left;
+        vertices[16].position.x = vertices[12].position.x;
+        vertices[18].position.x = vertices[10].position.x;
+        vertices[20].position.x = vertices[8].position.x;
+
+        vertices[15].position.x = _size.x;
+        vertices[17].position.x = _size.x;
+        vertices[19].position.x = _size.x;
+        vertices[21].position.x = _size.x;
+        size.x = _size.x;
+    }
+    if (_size.y != size.y && size.y != 0)
+    {
+        vertices[4].position.y = _size.y - middleRect.top;
+        vertices[5].position.y = _size.y - middleRect.top;
+        vertices[9].position.y = _size.y - middleRect.top;
+        vertices[10].position.y = _size.y - middleRect.top;
+        vertices[18].position.y = _size.y - middleRect.top;
+        vertices[19].position.y = _size.y - middleRect.top;
+
+        vertices[6].position.y = _size.y;
+        vertices[7].position.y = _size.y;
+        vertices[8].position.y = _size.y;
+        vertices[20].position.y = _size.y;
+        vertices[21].position.y = _size.y;
+        size.y = _size.y;
+    }
+    buffer.update(vertices.data());
+}

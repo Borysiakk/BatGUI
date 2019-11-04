@@ -22,14 +22,12 @@ class Theme
 {
 public:
 
-    Theme(std::string fileName);
+    explicit Theme(std::string fileName);
     WidgetConverter Create(WidgetType type);
-    Gui * getGui() {return gui.get();}
 private:
     void load();
 
     std::string fileName;
-    std::unique_ptr<Gui> gui;
     static std::vector<std::string> WidgetNames;
     static std::map<std::string,WidgetType> NameWidgetType;
     std::unordered_map<WidgetType,std::unique_ptr<Resource>> resources;

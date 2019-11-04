@@ -6,24 +6,27 @@
 #define BGUI_GUI_HPP
 
 #include "Widget.hpp"
+
 #include <memory>
 #include <vector>
-#include <unordered_map>
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-class Gui
+class Gui :public sf::Drawable
 {
 public:
     Gui();
+    void setConfigureGui();
     int  addWidget(Widget * obj);
     bool removeWidget(int id);
-    void setWindow(sf::RenderWindow & win);
-    void draw();
+    void handleEvent(sf::Event & events);
+
+protected:
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 private:
     sf::Texture texture;
-    sf::RenderWindow * window;
-    std::map<int,std::unique_ptr<Widget>> containers;
+    std::vector<std::unique_ptr<Widget>> containers;
 };
 
 

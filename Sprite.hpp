@@ -20,11 +20,11 @@ public:
     Sprite & operator = (const Sprite & sprite);
 
     void setTextureData(TextureData & resource);
-    void createVertices(const sf::Vector2f & size);
-    void updateVertices(const sf::Vector2f & position);
+    void createVertices(const sf::Vector2f & _size);
+    void updateVertices(const sf::Vector2f & _size);
 
 protected:
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const final ;
 private:
 
     std::array<sf::Vertex,22> vertices;
