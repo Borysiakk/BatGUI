@@ -1,0 +1,33 @@
+{
+  "Configurate":
+  {
+    "TextureGlobalName": "Black.png",
+    "FontGlobalName": "DroidSans.ttf"
+  },
+  "Button": 
+  {
+    "Texture": 
+	{
+      "TextureNormal": 
+	  {
+        "Part": "0,64,45,50",
+        "Middle": "10,10,25,30"
+      },
+      "TextureHover": 
+	  {
+        "Part": "45,64,45,50",
+        "Middle": "10,10,25,30"
+      },
+      "TextureDown": 
+	  {
+        "Part": "45,64,45,50",
+        "Middle": "10,10,25,30"
+      }
+    },
+    "Color":
+    {
+      "TextNormal": "190,190,190",
+      "TextHover": "250,250,250"
+    }
+  }
+}
