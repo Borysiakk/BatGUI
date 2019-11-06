@@ -7,17 +7,21 @@
 void fun(Button::Ptr a)
 {
     auto size = a->getSize();
-    a->setSize(sf::Vector2f(size.x + 50,size.y + 50));
+    a->setSize(sf::Vector2f(size.x * 1.25,size.y * 1.25));
 }
+
 int main()
 {
     Gui gui;
     Theme theme("Black.json");
+
     sf::RenderWindow window(sf::VideoMode(800,600,32),"Test Gui");
 
     Button::Ptr button = theme.Create(WidgetType::Button);
     button->connect(TypeSignal::Pressed,std::bind(fun,button));
     button->setPosition(50,50);
+    button->setSize(sf::Vector2f(220,100));
+    button->setText("Button");
 
     gui.addWidget(button);
 
@@ -30,7 +34,7 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::Q)
                 {
-                    button->setSize(sf::Vector2f(200,200));
+                    button->setSize(sf::Vector2f(120,50));
                 }
             }
             gui.handleEvent(event);

@@ -18,12 +18,18 @@ class Resource
 {
 public:
     Resource() = default;
-    TextureData & getTextureData(std::string name);
+
+    void addFontName(std::string_view name);
     void addTextureData(std::string name, std::string part, std::string middle);
+
+    sf::Font * getFont();
+    TextureData & getTextureData(std::string name);
 private:
     std::vector<float> StringToRect(std::string_view value_str);
-    std::map<std::string, TextureData> mTextureData;
+    std::map<std::string, TextureData> textureData;
+    std::unique_ptr<sf::Font> font;
 };
+
 
 
 #endif //BGUI_RESOURCE_HPP

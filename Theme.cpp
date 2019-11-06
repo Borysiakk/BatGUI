@@ -29,14 +29,17 @@ Theme::Theme(std::string fileName):fileName(fileName)
 
 WidgetConverter Theme::Create(WidgetType type)
 {
-    Widget * object;
+    Widget * object  = nullptr;
+    std::array<Resource*,2> stock;
+    stock[0] = resources[WidgetType::Widget].get();
 
     switch(type)
     {
         case WidgetType::Button:
         {
             object = new Button();
-            object->loadResourceData(resources[WidgetType::Button].get());
+            stock[1] = resources[WidgetType::Button].get();
+            object->loadResourceData(stock);
             break;
         }
     }
@@ -49,6 +52,18 @@ void Theme::load()
     pt::ptree root;
     std::unique_ptr<Resource> resource;
     pt::read_json("Black.json",root);
+
+    std::string fontName;
+    auto && configure = root.get_child("ConfigureGlobal");
+    for(auto item :configure)
+    {
+        if(item.first == "FontGlobalName")
+        {
+            resource = std::make_unique<Resource>();
+            resource->addFontName(item.second.data());
+            resources[WidgetType::Widget] = std::move(resource);
+        }
+    }
 
     for(auto && widgetName : WidgetNames )
     {

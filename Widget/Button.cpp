@@ -11,11 +11,16 @@ Button::Button():clickedType(ClickedType::Normal)
     size = sf::Vector2f(120,50);
 }
 
-void Button::loadResourceData(Resource * resource)
+void Button::loadResourceData(std::array<Resource*,2> resources)
 {
-    normal.setTextureData(resource->getTextureData("TextureNormal"));
-    hover.setTextureData(resource->getTextureData("TextureHover"));
-    down.setTextureData(resource->getTextureData("TextureDown"));
+    Resource * resource = resources[0];
+    Resource * textureInfo = resources[1];
+
+    normal.setTextureData(textureInfo->getTextureData("TextureNormal"));
+    hover.setTextureData(textureInfo->getTextureData("TextureHover"));
+    down.setTextureData(textureInfo->getTextureData("TextureDown"));
+
+    text.setFont(resource->getFont());
 
     normal.createVertices(sf::Vector2f(getSize().x,getSize().y));
     hover.createVertices(sf::Vector2f(getSize().x,getSize().y));
@@ -25,7 +30,19 @@ void Button::loadResourceData(Resource * resource)
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
-    target.draw(normal,states);
+    switch (clickedType)
+    {
+        case ClickedType::Normal:
+            target.draw(normal, states);
+            break;
+        case ClickedType::Hover:
+            target.draw(hover, states);
+            break;
+        case ClickedType::Down:
+            target.draw(down, states);
+            break;
+    }
+    text.draw(target,states);
 }
 
 
@@ -34,11 +51,25 @@ void Button::updateVertices(const sf::Vector2f & _size)
     normal.updateVertices(size);
     hover.updateVertices(size);
     down.updateVertices(size);
+    setText(text.getText());
 }
 
 bool Button::OnMove(float x, float y)
 {
-    return false;
+    if (mouseInWidget(x, y) == true)
+    {
+        if (clickedType != ClickedType::Down)
+        {
+            clickedType = ClickedType::Hover;
+        }
+        return true;
+    }
+    else
+    {
+        clickedType = ClickedType::Normal;
+        //m_text.setColor(TextNormal);
+        return false;
+    }
 }
 
 bool Button::OnMousePressed(float x, float y)
@@ -61,5 +92,25 @@ bool Button::OnMousePressed(float x, float y)
 
 bool Button::OnMouseReleased(float x, float y)
 {
-    return false;
+    if (mouseInWidget(x, y) == true)
+    {
+        clickedType = ClickedType::Hover;
+        text.setColor(sf::Color::Cyan);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Button::setText(sf::String _text)
+{
+    sf::Vector2f buttonSize = getSize();
+    text.setCharacterSize(text.findBestTextSize(buttonSize.y, buttonSize.x) * 0.8);
+
+    text.setText(_text);
+
+    sf::FloatRect textRect = text.getBoundLocal();
+    text.setPosition((getSize().x - textRect.width) / 2, (getSize().y - textRect.height) / 2);
 }

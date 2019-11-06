@@ -32,7 +32,7 @@ public:
     virtual void connectSignalInit();
     virtual void setSize(sf::Vector2f size);
     virtual bool mouseInWidget(float x, float y);
-    virtual void loadResourceData(Resource * resource) = 0;
+    virtual void loadResourceData(std::array<Resource*,2> resources) = 0;
     virtual void updateVertices(const sf::Vector2f & size) = 0;
 
 protected:
