@@ -1,4 +1,4 @@
-# BGUI
+# BatGUI
 The library enables creating a graphical interface in the SFML library
 
 ## Init
