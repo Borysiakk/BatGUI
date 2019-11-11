@@ -1,2 +1,2 @@
 # BGUI
-Biblioteka umożliwia dodanie do interfejsu graficznego do naszego projektu w Bibliotece SFML.
+Biblioteka umożliwia dodanie do interfejsu graficznego do naszego projektu w bibliotece SFML.
