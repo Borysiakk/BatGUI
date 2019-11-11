@@ -7,7 +7,7 @@ The library enables creating a graphical interface in the SFML library
   Theme theme("Gui.json");
 ```
 
-## Example Button
+## Button
 ```
 void closeEx(sf::RenderWindow & window)
 {
