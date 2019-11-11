@@ -18,6 +18,7 @@ enum class WidgetType
     Widget,
     Button,
     EditBox,
+    CheckBox,
 };
 
 class Widget :public sf::Drawable, public sf::Transformable, public WidgetClickable

@@ -8,7 +8,7 @@
 Gui::Gui():containers()
 {
     containers.reserve(24);
-    texture.loadFromFile("Black.png");
+    texture.loadFromFile("Gui.png");
 }
 
 

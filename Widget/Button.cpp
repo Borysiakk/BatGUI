@@ -95,7 +95,7 @@ bool Button::OnMouseReleased(float x, float y)
     if (mouseInWidget(x, y) == true)
     {
         clickedType = ClickedType::Hover;
-        text.setColor(sf::Color::Cyan);
+        text.setColor(sf::Color::White);
         return true;
     }
     else

@@ -13,17 +13,31 @@ void fun(Button::Ptr a)
 int main()
 {
     Gui gui;
-    Theme theme("Black.json");
+    Theme theme("Gui.json");
 
-    sf::RenderWindow window(sf::VideoMode(800,600,32),"Test Gui");
+    sf::RenderWindow window(sf::VideoMode(400,400,32),"Test Gui");
 
     Button::Ptr button = theme.Create(WidgetType::Button);
     button->connect(TypeSignal::Pressed,std::bind(fun,button));
-    button->setPosition(50,50);
-    button->setSize(sf::Vector2f(220,100));
-    button->setText("Button");
+    button->setPosition(70,50);
+    button->setSize(sf::Vector2f(250,50));
+    button->setText("NEW GAME");
+
+    Button::Ptr button1 = theme.Create(WidgetType::Button);
+    button1->connect(TypeSignal::Pressed,std::bind(fun,button));
+    button1->setPosition(70,130);
+    button1->setSize(sf::Vector2f(250,50));
+    button1->setText("OPTIONS");
+
+    Button::Ptr button2 = theme.Create(WidgetType::Button);
+    button2->connect(TypeSignal::Pressed,std::bind(fun,button));
+    button2->setPosition(70,210);
+    button2->setSize(sf::Vector2f(250,50));
+    button2->setText("EXIT");
 
     gui.addWidget(button);
+    gui.addWidget(button1);
+    gui.addWidget(button2);
 
     while(window.isOpen())
     {
@@ -32,14 +46,14 @@ int main()
         {
             if (event.type == sf::Event::KeyPressed)
             {
-                if (event.key.code == sf::Keyboard::Q)
+                if (event.key.code == sf::Keyboard::Escape)
                 {
-                    button->setSize(sf::Vector2f(120,50));
+                    window.close();
                 }
             }
             gui.handleEvent(event);
         }
-        window.clear(sf::Color::Blue);
+        window.clear(sf::Color::White);
         window.draw(gui);
         window.display();
     }

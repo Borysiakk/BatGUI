@@ -51,7 +51,7 @@ void Theme::load()
 {
     pt::ptree root;
     std::unique_ptr<Resource> resource;
-    pt::read_json("Black.json",root);
+    pt::read_json(fileName,root);
 
     std::string fontName;
     auto && configure = root.get_child("ConfigureGlobal");
